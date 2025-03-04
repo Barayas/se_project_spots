@@ -13,12 +13,16 @@
 
 .card__title {
   margin: 12px 0 4px;
+  max-width: 413px;
   font-family: Poppins, Arial, Helvetica, sans-serif;
   font-weight: 500;
   font-size: 20px;
   line-height: 24px;
   letter-spacing: 0%;
   color: #212121;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .card__like-button {
