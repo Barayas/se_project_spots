@@ -15,7 +15,7 @@
 
 .profile__name {
   margin: 0 0 12px;
-  font-family: Poppins;
+  font-family: Poppins, Arial, Helvetica, sans-serif;
   font-weight: 500;
   font-size: 32px;
   line-height: 32px;
@@ -24,6 +24,13 @@
 
 .profile__description {
   margin: 0;
+  font-family: Poppins, Arial, Helvetica, sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 16px;
+  letter-spacing: 0%;
+  color: #212121;
+  opacity: 70%;
 }
 
 .profile__edit-button {
@@ -31,5 +38,52 @@
 }
 
 .profile__add-button {
-  margin-left: auto;
+  display: flex;
+  margin: 138px 0 20px auto;
+  max-width: 149px;
+  max-height: 52px;
+  padding: 18px 32px;
+  border-radius: 8px;
+  color: #fcf5e5;
+  background: #212121;
+  align-items: center;
+  font-size: 16px;
+  line-height: 16px;
+  white-space: nowrap;
+  gap: 8px;
+}
+
+@media screen and (max-width: 627px) {
+  .profile {
+    flex-direction: column;
+    max-width: 288px;
+    align-items: center;
+    text-align: center;
+    padding-top: 20px;
+  }
+
+  .profile__avatar {
+    margin-right: 0;
+    height: 80px;
+    width: 80px;
+    margin-bottom: 12px;
+  }
+
+  .profile__name {
+    font-size: 20px;
+    margin-bottom: 6px;
+  }
+
+  .profile__description {
+    font-size: 16px;
+    margin-bottom: 32px;
+  }
+
+  .profile__edit-button {
+    margin-bottom: 20px;
+  }
+
+  .profile__add-button {
+    margin: 0;
+  }
 }
