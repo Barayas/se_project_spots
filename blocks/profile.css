@@ -84,6 +84,7 @@
   line-height: 16px;
   white-space: nowrap;
   gap: 8px;
+  border: none;
 }
 
 .profile__add-button:hover {

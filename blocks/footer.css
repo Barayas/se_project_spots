@@ -2,5 +2,14 @@
   display: flex;
   justify-content: center;
   padding: 60px 0;
+}
+
+.footer__copyright {
   font-family: Poppins, Arial, Helvetica, sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #212121;
+  opacity: 0.7;
 }
