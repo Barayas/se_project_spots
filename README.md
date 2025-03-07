@@ -18,3 +18,5 @@ This project is made so all the elements are displayed correctly on popular scre
 The project is deployed on GitHub Pages
 
 - Link to the deployment: https://barayas.github.io/se_project_spots/
+
+- Video link: https://drive.google.com/file/d/1r4CUUrKzKa5QeNb-3jtnqACLgDslaiMd/view?usp=sharing

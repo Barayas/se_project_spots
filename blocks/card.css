@@ -3,6 +3,7 @@
   height: 413px;
   object-fit: cover;
   display: block;
+  border-radius: 8px;
 }
 
 .card__content {
@@ -13,7 +14,7 @@
 
 .card__title {
   margin: 12px 0 4px;
-  max-width: 413px;
+  max-width: 337px;
   font-family: Poppins, Arial, Helvetica, sans-serif;
   font-weight: 500;
   font-size: 20px;
@@ -42,5 +43,10 @@
 @media screen and (max-width: 627px) {
   .card__image {
     height: 288px;
+  }
+
+  .card__title {
+    font-size: 16px;
+    line-height: 100%;
   }
 }
