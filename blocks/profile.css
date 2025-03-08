@@ -110,7 +110,7 @@
 
   .profile__name {
     font-size: 20px;
-    margin-bottom: 6px;
+    margin-bottom: 0px;
     max-width: 288px;
   }
 
