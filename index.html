@@ -107,7 +107,7 @@
       <footer class="footer">
         <p class="footer__copyright">© 2025 Nathan Louie</p>
       </footer>
-      <div class="modal modal__opened">
+      <div class="modal" id="edit-modal">
         <div class="modal__container">
           <button type="submit" class="modal__close-button">
             <img src="./images/close.svg" alt="close icon" />
@@ -132,7 +132,13 @@
                 placeholder="Describe yourself"
               />
             </label>
-            <button type="submit" class="modal__submit-button">Save</button>
+            <button
+              type="submit"
+              class="modal__submit-button"
+              id="save-profile-modal"
+            >
+              Save
+            </button>
           </form>
         </div>
       </div>
