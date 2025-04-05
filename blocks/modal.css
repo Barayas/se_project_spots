@@ -54,7 +54,7 @@
   cursor: pointer;
 }
 
-.modal__close_button_preview {
+.modal__close-button_preview {
   background-image: url(../images/close-icon.svg);
   width: 40px;
   height: 40px;
@@ -66,7 +66,7 @@
   background-color: transparent;
 }
 
-.modal__close_button_preview:hover {
+.modal__close-button_preview:hover {
   background-image: url(../images/close-icon-hover.svg);
 }
 
