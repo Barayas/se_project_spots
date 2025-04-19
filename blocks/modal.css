@@ -126,6 +126,10 @@
   border-width: 1px;
 }
 
+.modal__input_type_error {
+  border: 1px solid rgba(255, 0, 0, 0.6);
+}
+
 .modal__input:hover {
   border-color: rgba(33, 33, 33, 1);
 }
@@ -135,6 +139,11 @@
   border-color: rgba(33, 33, 33, 0.4);
 }
 
+.modal__error {
+  display: block;
+  color: red;
+}
+
 .modal__submit-button {
   width: 156px;
   padding: 18px 0;
@@ -142,6 +151,10 @@
   color: rgba(252, 245, 229);
   border-radius: 8px;
   cursor: pointer;
+}
+
+.modal__submit-button-disabled {
+  opacity: 50%;
 }
 
 @media screen and (max-width: 627px) {
