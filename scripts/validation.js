@@ -3,6 +3,7 @@ const settings = {
   inputSelector: ".modal__input",
   submitButtonSelector: ".modal__submit-button",
   inactiveButtonClass: "modal__submit-button-disabled",
+  inputErrorClass: "modal__input_type_error",
   errorClass: "modal__error",
 };
 
@@ -49,7 +50,7 @@ const disableButton = (buttonEl, config) => {
 const resetValidation = (formEl, config) => {
   const inputList = Array.from(formEl.querySelectorAll(config.inputSelector));
   inputList.forEach((input) => {
-    hideInputError(formEl, input);
+    hideInputError(formEl, input, config);
   });
 };
 

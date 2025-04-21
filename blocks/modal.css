@@ -126,8 +126,8 @@
   border-width: 1px;
 }
 
-.modal__input_type_error {
-  border: 1px solid rgba(255, 0, 0, 0.6);
+.modal__input.modal__input_type_error {
+  border: 1px solid rgba(255, 0, 0, 0.6) !important;
 }
 
 .modal__input:hover {

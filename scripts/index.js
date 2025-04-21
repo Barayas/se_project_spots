@@ -63,7 +63,6 @@ const cardTemplate = document.querySelector("#card-template");
 const cardsList = document.querySelector(".cards__list");
 
 function getCardElement(data) {
-  console.log(data);
   const cardElement = cardTemplate.content
     .querySelector(".card")
     .cloneNode(true);
@@ -99,12 +98,31 @@ function handleDeleteCardButton(evt) {
   cardElement.remove();
 }
 
+function handleEscClose(evt) {
+  if (evt.key === "Escape") {
+    const openedModal = document.querySelector(".modal_opened");
+    if (openedModal) {
+      closeModal(openedModal);
+    }
+  }
+}
+
+function handleClickOffClose(evt) {
+  if (evt.target.classList.contains("modal")) {
+    closeModal(evt.target);
+  }
+}
+
 function openModal(modal) {
   modal.classList.add("modal_opened");
+  document.addEventListener("keydown", handleEscClose);
+  modal.addEventListener("click", handleClickOffClose);
 }
 
 function closeModal(modal) {
   modal.classList.remove("modal_opened");
+  document.removeEventListener("keydown", handleEscClose);
+  modal.removeEventListener("click", handleClickOffClose);
 }
 
 function handleEditFormSubmit(evt) {
@@ -130,11 +148,11 @@ editProfileButton.addEventListener("click", () => {
   editModalNameInput.value = profileName.textContent;
   editModalDescriptionInput.value = profileDescription.textContent;
   openModal(editModal);
+  resetValidation(editFormElement, settings);
 });
 
 editModalCloseButton.addEventListener("click", () => {
   closeModal(editModal);
-  resetValidation(editFormElement, settings);
 });
 
 cardModalButton.addEventListener("click", () => {
