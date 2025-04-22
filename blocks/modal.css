@@ -153,7 +153,7 @@
   cursor: pointer;
 }
 
-.modal__submit-button-disabled {
+.modal__submit-button_disabled {
   opacity: 50%;
   cursor: not-allowed;
 }
