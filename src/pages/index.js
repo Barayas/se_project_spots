@@ -3,6 +3,7 @@ import {
   enableValidation,
   settings,
   resetValidation,
+  disableButton,
 } from "../scripts/validation.js";
 import Api from "../utils/Api.js";
 
@@ -52,6 +53,14 @@ const avatarModalCloseButton = avatarModal.querySelector(
   ".modal__close-button"
 );
 const avatarModalInput = avatarModal.querySelector("#profile-avatar-input");
+const avatarElement = document.querySelector(".profile__avatar");
+
+//Delete
+const deleteModal = document.querySelector("#delete-modal");
+const deleteModalForm = deleteModal.querySelector(".modal__form-delete");
+const deleteModalCloseButton = deleteModal.querySelector(
+  ".modal__close-button_delete"
+);
 
 //Modal
 const previewModal = document.querySelector("#preview-modal");
@@ -72,8 +81,13 @@ const cardLinkInput = cardForm.querySelector("#add-card-link-input");
 const cardTemplate = document.querySelector("#card-template");
 const cardsList = document.querySelector(".cards__list");
 
-//Imported Images
-const avatarElement = document.querySelector(".profile__avatar");
+let selectedCard, selectedCardId;
+
+function handleDeleteCardButton(cardElement, cardId) {
+  selectedCard = cardElement;
+  selectedCardId = cardId;
+  openModal(deleteModal);
+}
 
 function getCardElement(data) {
   const cardElement = cardTemplate.content
@@ -100,15 +114,11 @@ function getCardElement(data) {
     previewModalImageEl.alt = data.name;
   });
 
-  cardDeleteButton.addEventListener("click", handleDeleteCardButton);
+  cardDeleteButton.addEventListener("click", (evt) =>
+    handleDeleteCardButton(cardElement, data._id)
+  );
 
   return cardElement;
-}
-
-function handleDeleteCardButton(evt) {
-  evt.preventDefault();
-  const cardElement = evt.target.closest(".card");
-  cardElement.remove();
 }
 
 function handleEscClose(evt) {
@@ -138,6 +148,19 @@ function closeModal(modal) {
   modal.removeEventListener("click", handleClickOffClose);
 }
 
+function handleDeleteSubmit(evt) {
+  evt.preventDefault();
+  api
+    .deleteCard(selectedCardId)
+    .then(() => {
+      selectedCard.remove();
+      closeModal(deleteModal);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+}
+
 function handleEditFormSubmit(evt) {
   evt.preventDefault();
   api
@@ -159,12 +182,19 @@ function handleAddCardSubmit(evt) {
   evt.preventDefault();
 
   const inputValues = { name: cardNameInput.value, link: cardLinkInput.value };
-  const cardElement = getCardElement(inputValues);
-
-  cardsList.prepend(cardElement);
-  evt.target.reset();
-  disableButton(cardSubmitButton, settings);
-  closeModal(cardModal);
+  api
+    .addNewCard(inputValues)
+    .then((data) => {
+      const cardId = data._id;
+      const cardElement = getCardElement({ ...inputValues, _id: cardId });
+      cardsList.prepend(cardElement);
+      evt.target.reset();
+      disableButton(cardSubmitButton, settings);
+      closeModal(cardModal);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
 }
 
 function handleAvatarSubmit(evt) {
@@ -201,6 +231,8 @@ avatarModalButton.addEventListener("click", () => {
 });
 
 avatarModalForm.addEventListener("submit", handleAvatarSubmit);
+
+deleteModalForm.addEventListener("submit", handleDeleteSubmit);
 
 cardModalCloseButton.addEventListener("click", () => {
   closeModal(cardModal);
