@@ -5,6 +5,7 @@ import {
   resetValidation,
   disableButton,
 } from "../scripts/validation.js";
+import { setButtonText } from "../utils/helper.js";
 import Api from "../utils/Api.js";
 
 const api = new Api({
@@ -60,6 +61,9 @@ const deleteModal = document.querySelector("#delete-modal");
 const deleteModalForm = deleteModal.querySelector(".modal__form-delete");
 const deleteModalCloseButton = deleteModal.querySelector(
   ".modal__close-button_delete"
+);
+const deleteModalCancelButton = deleteModal.querySelector(
+  ".modal__submit-button_type_cancel"
 );
 
 //Modal
@@ -167,19 +171,28 @@ function closeModal(modal) {
 
 function handleDeleteSubmit(evt) {
   evt.preventDefault();
+
+  const submitButton = evt.submitter;
+  setButtonText(submitButton, true, "Delete", "Deleting...");
+
   api
     .deleteCard(selectedCardId)
     .then(() => {
       selectedCard.remove();
       closeModal(deleteModal);
     })
-    .catch((err) => {
-      console.error(err);
+    .catch(console.error)
+    .finally(() => {
+      setButtonText(submitButton, false, "Delete", "Deleting...");
     });
 }
 
 function handleEditFormSubmit(evt) {
   evt.preventDefault();
+
+  const submitButton = evt.submitter;
+  setButtonText(submitButton, true);
+
   api
     .editUserInfo({
       name: editModalNameInput.value,
@@ -190,13 +203,17 @@ function handleEditFormSubmit(evt) {
       profileDescription.textContent = user.about;
       closeModal(editModal);
     })
-    .catch((err) => {
-      console.error(err);
+    .catch(console.error)
+    .finally(() => {
+      setButtonText(submitButton, false);
     });
 }
 
 function handleAddCardSubmit(evt) {
   evt.preventDefault();
+
+  const submitButton = evt.submitter;
+  setButtonText(submitButton, true);
 
   const inputValues = { name: cardNameInput.value, link: cardLinkInput.value };
   api
@@ -212,13 +229,18 @@ function handleAddCardSubmit(evt) {
       disableButton(cardSubmitButton, settings);
       closeModal(cardModal);
     })
-    .catch((err) => {
-      console.error(err);
+    .catch(console.error)
+    .finally(() => {
+      setButtonText(submitButton, false);
     });
 }
 
 function handleAvatarSubmit(evt) {
   evt.preventDefault();
+
+  const submitButton = evt.submitter;
+  setButtonText(submitButton, true);
+
   api
     .editUserAvatar({ avatar: avatarModalInput.value })
     .then((user) => {
@@ -226,8 +248,9 @@ function handleAvatarSubmit(evt) {
       avatarElement.alt = user.name;
       closeModal(avatarModal);
     })
-    .catch((err) => {
-      console.error(err);
+    .catch(console.error)
+    .finally(() => {
+      setButtonText(submitButton, false);
     });
 }
 
@@ -253,6 +276,14 @@ avatarModalButton.addEventListener("click", () => {
 avatarModalForm.addEventListener("submit", handleAvatarSubmit);
 
 deleteModalForm.addEventListener("submit", handleDeleteSubmit);
+
+deleteModalCloseButton.addEventListener("click", () => {
+  closeModal(deleteModal);
+});
+
+deleteModalCancelButton.addEventListener("click", () => {
+  closeModal(deleteModal);
+});
 
 cardModalCloseButton.addEventListener("click", () => {
   closeModal(cardModal);
