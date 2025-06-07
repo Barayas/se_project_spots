@@ -112,6 +112,10 @@
   letter-spacing: 0;
 }
 
+.modal__label_type_avatar {
+  color: rgba(33, 33, 33, 0.7);
+}
+
 .modal__input {
   padding: 16px 12px;
   border-radius: 8px;
@@ -151,6 +155,7 @@
   color: rgba(252, 245, 229);
   border-radius: 8px;
   cursor: pointer;
+  font-family: Poppins, Arial, Helvetica, sans-serif;
 }
 
 .modal__submit-button_disabled {
