@@ -246,6 +246,8 @@ function handleAvatarSubmit(evt) {
     .then((user) => {
       avatarElement.src = user.avatar;
       avatarElement.alt = user.name;
+      evt.target.reset();
+      disableButton(avatarSubmitButton, settings);
       closeModal(avatarModal);
     })
     .catch(console.error)
