@@ -90,6 +90,7 @@ function handleDeleteCardButton(cardElement, cardId) {
 }
 
 function getCardElement(data) {
+  console.log("Card data:", data);
   const cardElement = cardTemplate.content
     .querySelector(".card")
     .cloneNode(true);
@@ -103,8 +104,24 @@ function getCardElement(data) {
   cardImageEl.src = data.link;
   cardImageEl.alt = data.name;
 
+  const isLiked = data.isLiked;
+  if (isLiked) {
+    cardLikeButton.classList.add("card__like-button_liked");
+  }
+
   cardLikeButton.addEventListener("click", () => {
     cardLikeButton.classList.toggle("card__like-button_liked");
+    const isLiked = cardLikeButton.classList.contains(
+      "card__like-button_liked"
+    );
+    api
+      .handleLike(data._id, !isLiked)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   });
 
   cardImageEl.addEventListener("click", () => {
@@ -185,8 +202,11 @@ function handleAddCardSubmit(evt) {
   api
     .addNewCard(inputValues)
     .then((data) => {
-      const cardId = data._id;
-      const cardElement = getCardElement({ ...inputValues, _id: cardId });
+      const cardElement = getCardElement({
+        ...inputValues,
+        _id: data._id,
+        isLiked: false,
+      });
       cardsList.prepend(cardElement);
       evt.target.reset();
       disableButton(cardSubmitButton, settings);
