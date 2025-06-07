@@ -12,20 +12,36 @@
   <body>
     <div class="page">
       <header class="header">
-        <img alt="Spots logo" class="header__logo" />
+        <img
+          alt="Spots logo"
+          class="header__logo"
+          src="<%=require('./images/logo.svg')%>"
+        />
       </header>
       <main class="content">
         <section class="profile page__section">
-          <img alt="Bessie Coleman" class="profile__avatar" />
+          <div class="profile__avatar-container">
+            <button class="profile__avatar-button">
+              <img
+                src="<%=require('./images/pencil-light.svg')%>"
+                alt="pencil icon"
+              />
+            </button>
+            <img alt="Bessie Coleman" class="profile__avatar" />
+          </div>
           <div class="profile__column">
             <h1 class="profile__name">Bessie Coleman</h1>
             <p class="profile__description">Civil Aviator</p>
             <button type="button" class="profile__edit-button">
-              <img alt="pencil icon" />Edit Profile
+              <img
+                src="<%=require('./images/pencil.svg')%>"
+                alt="pencil icon"
+              />Edit Profile
             </button>
           </div>
           <button type="button" class="profile__add-button">
-            <img alt="plus icon" />New Post
+            <img src="<%=require('./images/plus.svg')%>" alt="plus icon" />New
+            Post
           </button>
         </section>
         <section class="cards page__section">
@@ -49,7 +65,11 @@
       <div class="modal" id="edit-modal">
         <div class="modal__container">
           <button type="button" class="modal__close-button">
-            <img alt="close icon" class="modal__close-img" />
+            <img
+              src="<%=require('./images/close.svg')%>"
+              alt="close icon"
+              class="modal__close-img"
+            />
           </button>
           <h2 class="modal__title">Edit profile</h2>
           <form name="edit-profile" class="modal__form" novalidate>
@@ -96,7 +116,11 @@
       <div class="modal" id="add-card-modal">
         <div class="modal__container">
           <button type="button" class="modal__close-button">
-            <img alt="close icon" class="modal__close-img" />
+            <img
+              src="<%=require('./images/close.svg')%>"
+              alt="close icon"
+              class="modal__close-img"
+            />
           </button>
           <h2 class="modal__title">New post</h2>
           <form name="edit-profile" class="modal__form" novalidate>
@@ -141,9 +165,46 @@
         <button
           type="button"
           class="modal__close-button modal__close-button_preview"
-        ></button>
+        >
+          <img
+            src="<%=require('./images/close.svg')%>"
+            alt="close icon"
+            class="modal__close-img"
+          />
+        </button>
         <img class="modal__image" src="" alt="" />
         <p class="modal__caption"></p>
+      </div>
+    </div>
+    <div class="modal" id="avatar-modal">
+      <div class="modal__container">
+        <button type="button" class="modal__close-button">
+          <img
+            src="<%=require('./images/close.svg')%>"
+            alt="close icon"
+            class="modal__close-img"
+          />
+        </button>
+        <h2 class="modal__title">Edit avatar</h2>
+        <form name="avatar-modal" class="modal__form" novalidate>
+          <label for="profile-avatar-input" class="modal__label">
+            Avatar
+            <input
+              id="profile-avatar-input"
+              class="modal__input"
+              placeholder="Avatar goes here"
+              required
+            />
+            <span id="profile-avatar-input-error" class="modal__error"></span>
+          </label>
+          <button
+            type="submit"
+            class="modal__submit-button"
+            id="save-avatar-modal"
+          >
+            Save
+          </button>
+        </form>
       </div>
     </div>
   </body>

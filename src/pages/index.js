@@ -1,10 +1,9 @@
 import "./index.css";
-import avatarImage from "../images/avatar.jpg";
-import pencilImage from "../images/pencil.svg";
-import plusImage from "../images/plus.svg";
-import headerImage from "../images/logo.svg";
-import closeImage from "../images/close.svg";
-import { enableValidation, settings } from "../scripts/validation.js";
+import {
+  enableValidation,
+  settings,
+  resetValidation,
+} from "../scripts/validation.js";
 import Api from "../utils/Api.js";
 
 const api = new Api({
@@ -17,12 +16,16 @@ const api = new Api({
 
 api
   .getAppInfo()
-  .then(([cards]) => {
-    console.log(cards);
+  .then(([cards, user]) => {
     cards.forEach((item) => {
       const cardElement = getCardElement(item);
       cardsList.append(cardElement);
     });
+
+    profileName.textContent = user.name;
+    profileDescription.textContent = user.about;
+    avatarElement.src = user.avatar;
+    avatarElement.alt = user.name;
   })
   .catch(console.error);
 
@@ -54,6 +57,7 @@ const previewModalCaptionEl = previewModal.querySelector(".modal__caption");
 const previewModalCloseButton = previewModal.querySelector(
   ".modal__close-button"
 );
+const editModalCloseIcon = document.querySelectorAll(".modal__close-img");
 
 //Cards
 const cardTemplate = document.querySelector("#card-template");
@@ -64,12 +68,6 @@ const avatarElement = document.querySelector(".profile__avatar");
 const logoElement = document.querySelector(".header__logo");
 const imageEditButton = editProfileButton.querySelector("img");
 const imagePostButton = cardModalButton.querySelector("img");
-
-avatarElement.src = avatarImage;
-logoElement.src = headerImage;
-imageEditButton.src = pencilImage;
-imagePostButton.src = plusImage;
-previewModalCloseButton.src = closeImage;
 
 function getCardElement(data) {
   const cardElement = cardTemplate.content
@@ -136,9 +134,19 @@ function closeModal(modal) {
 
 function handleEditFormSubmit(evt) {
   evt.preventDefault();
-  profileName.textContent = editModalNameInput.value;
-  profileDescription.textContent = editModalDescriptionInput.value;
-  closeModal(editModal);
+  api
+    .editUserInfo({
+      name: editModalNameInput.value,
+      about: editModalDescriptionInput.value,
+    })
+    .then((user) => {
+      profileName.textContent = user.name;
+      profileDescription.textContent = user.about;
+      closeModal(editModal);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
 }
 
 function handleAddCardSubmit(evt) {
