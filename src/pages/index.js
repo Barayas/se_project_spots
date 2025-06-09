@@ -108,19 +108,17 @@ function getCardElement(data) {
   cardImageEl.src = data.link;
   cardImageEl.alt = data.name;
 
-  const isLiked = data.isLiked;
+  let isLiked = data.isLiked;
   if (isLiked) {
     cardLikeButton.classList.add("card__like-button_liked");
   }
 
   cardLikeButton.addEventListener("click", () => {
-    cardLikeButton.classList.toggle("card__like-button_liked");
-    const isLiked = cardLikeButton.classList.contains(
-      "card__like-button_liked"
-    );
     api
       .handleLike(data._id, !isLiked)
       .then((res) => {
+        cardLikeButton.classList.toggle("card__like-button_liked");
+        isLiked = !isLiked;
         console.log(res);
       })
       .catch((err) => {
@@ -247,7 +245,7 @@ function handleAvatarSubmit(evt) {
       avatarElement.src = user.avatar;
       avatarElement.alt = user.name;
       evt.target.reset();
-      disableButton(avatarSubmitButton, settings);
+      disableButton(submitButton, settings);
       closeModal(avatarModal);
     })
     .catch(console.error)
