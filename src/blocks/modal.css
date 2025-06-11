@@ -30,6 +30,11 @@
   border-radius: 8px;
 }
 
+.modal__container_type_delete {
+  width: 630px;
+  height: 172px;
+}
+
 .modal__content_type_preview {
   padding: 0;
   position: relative;
@@ -52,6 +57,13 @@
   border: none;
   background-color: #fff;
   cursor: pointer;
+}
+
+.modal__close-button_delete {
+  position: absolute;
+  top: 0px;
+  right: -50px;
+  background-color: transparent;
 }
 
 .modal__close-button_preview {
@@ -90,6 +102,14 @@
   opacity: 0.4;
 }
 
+.modal__form-delete {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
 .modal__title {
   margin: 0 0 32px;
   font-family: Poppins, Arial, Helvetica, sans-serif;
@@ -98,6 +118,11 @@
   line-height: 100%;
   letter-spacing: 0;
   color: rgba(33, 33, 33);
+}
+
+.modal__title_type_delete {
+  font-size: 24px;
+  text-align: center;
 }
 
 .modal__label {
@@ -110,6 +135,10 @@
   font-size: 16px;
   line-height: 110.00000000000001%;
   letter-spacing: 0;
+}
+
+.modal__label_type_avatar {
+  color: rgba(33, 33, 33, 0.7);
 }
 
 .modal__input {
@@ -151,6 +180,40 @@
   color: rgba(252, 245, 229);
   border-radius: 8px;
   cursor: pointer;
+  font-family: Poppins, Arial, Helvetica, sans-serif;
+  font-weight: 500;
+}
+
+.modal__delete-button {
+  width: 156px;
+  padding: 18px 0;
+  background-color: rgba(33, 33, 33);
+  color: rgba(252, 245, 229);
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: Poppins, Arial, Helvetica, sans-serif;
+  font-weight: 500;
+}
+
+.modal__submit-button_type_delete {
+  background-color: rgba(255, 101, 101, 1);
+  color: rgba(33, 33, 33, 1);
+  border: none;
+}
+
+.modal__submit-button_type_delete:hover {
+  background: rgba(255, 51, 51, 1);
+}
+
+.modal__submit-button_type_cancel {
+  background-color: rgba(255, 255, 255, 1);
+  border: 1px solid rgba(33, 33, 33, 1);
+  color: rgba(33, 33, 33, 1);
+}
+
+.modal__submit-button_type_cancel:hover {
+  background-color: rgba(33, 33, 33, 1);
+  color: rgba(255, 255, 255, 1);
 }
 
 .modal__submit-button_disabled {
@@ -165,6 +228,16 @@
 
   .modal__container {
     padding: 12px;
+  }
+
+  .modal__container_type_delete {
+    max-width: 300px;
+    height: auto;
+    min-height: 208px;
+  }
+
+  .modal__form-delete {
+    flex-direction: column;
   }
 
   .modal__image {
@@ -193,6 +266,11 @@
   .modal__close-button {
     top: 12px;
     right: 12px;
+  }
+
+  .modal__close-button_delete {
+    top: -45px;
+    right: 0;
   }
 
   .modal__label {
